@@ -4,16 +4,13 @@ import android.content.Context
 import android.graphics.BitmapShader
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Shader
 import android.graphics.drawable.Drawable
-import android.media.Image
 import android.util.AttributeSet
-import android.view.View
 import androidx.annotation.IntDef
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.core.graphics.drawable.toBitmap
-import androidx.core.view.drawToBitmap
 import com.example.customview.R
 import com.example.customview.utils.ImageUtil
 
@@ -26,7 +23,7 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
 
 
     // 头像资源
-    private var avatarSize: Float = 100f
+    private var avatarSize: Float = 200f
     private var avatarPaint: Paint
     var avatarDrawable: Drawable? = null
         set(value) {
@@ -35,7 +32,7 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
         }
 
     // 标签资源
-    private var labelSize: Float = 20f
+    private var labelSize: Float = 40f
     private var labelPaint: Paint
     var labelDrawable: Drawable? = null
         set(value) {
@@ -48,12 +45,12 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
 
     var isShowBorder: Boolean? = false
 
-    private var avatarType: Int = LabelType.TYPE_NORMAL
+    private var labelType: Int = LabelType.TYPE_NORMAL
 
     init {
         attributes?.let {
             context.obtainStyledAttributes(it, R.styleable.AvatarView).apply {
-                avatarType = getInt(R.styleable.AvatarView_avatar_type, LabelType.TYPE_NORMAL)
+                labelType = getInt(R.styleable.AvatarView_avatar_type, LabelType.TYPE_NORMAL)
             }
         }
 
@@ -68,20 +65,21 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         // 自定义View的控件大小
-        val elementWidth = (avatarSize * 2).toInt()
-        val elementHeight = (avatarSize * 2).toInt()
+        val elementWidth = avatarSize.toInt()
+        val elementHeight = avatarSize.toInt()
         setMeasuredDimension(elementWidth, elementHeight)
     }
 
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
         drawAvatar(canvas)
+        drawLabel(canvas)
     }
 
     private fun drawAvatar(canvas: Canvas?) {
         avatarDrawable?.let {
-            val width = (avatarSize * 2).toInt()
-            val height = (avatarSize * 2f).toInt()
+            val width = avatarSize.toInt()
+            val height = avatarSize.toInt()
             val bitmap = ImageUtil.centerCropToSquare(
                 ImageUtil.scaleToSquare(
                     ImageUtil.getBitmapByDrawable(it), width, height
@@ -91,10 +89,44 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
             val avatarShader = BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
             avatarPaint.shader = avatarShader
 
-            val cx = avatarSize
-            val cy = avatarSize
-            val radius = avatarSize
+
+            val radius = avatarSize / 2
+            val cx = avatarSize / 2
+            val cy = avatarSize / 2
             canvas?.drawCircle(cx, cy, radius, avatarPaint)
+        }
+    }
+
+    private fun drawLabel(canvas: Canvas?) {
+        labelDrawable?.let {
+            val width = labelSize.toInt()
+            val height = labelSize.toInt()
+            val bitmap = ImageUtil.centerCropToSquare(
+                ImageUtil.scaleToSquare(
+                    ImageUtil.getBitmapByDrawable(it), width, height
+                )
+            )
+
+            val radius = labelSize / 2
+            val cx = avatarSize - radius
+            val cy = avatarSize - radius
+
+            val labelShader = BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP).apply {
+                // 用Matrix进行图形变换，比如平移、缩放、旋转等操作
+                // 通过postTranslate()方法对图像进行平移操作
+                Matrix().apply {
+                    reset()
+                    postTranslate(
+                        avatarSize - labelSize,
+                        avatarSize - labelSize
+                    )
+                    setLocalMatrix(this)
+                }
+            }
+            labelPaint.shader = labelShader
+            labelPaint.color = Color.RED
+
+            canvas?.drawCircle(cx, cy, radius, labelPaint)
         }
     }
 
