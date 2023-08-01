@@ -6,6 +6,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Matrix
 import android.graphics.Paint
+import android.graphics.Paint.Style
 import android.graphics.Shader
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
@@ -20,7 +21,6 @@ import com.example.customview.utils.ImageUtil
  */
 class AvatarView(context: Context, attributes: AttributeSet? = null) :
     AppCompatImageView(context, attributes) {
-
 
     // 头像资源
     private var avatarSize: Float = 200f
@@ -41,9 +41,10 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
         }
 
     // 头像边框
-    private var borderPaint: Paint? = null
+    private var borderPaint: Paint
+    private val borderStrokeWidth = 8f
 
-    var isShowBorder: Boolean? = false
+    var isShowBorder: Boolean = true
 
     private var labelType: Int = LabelType.TYPE_NORMAL
 
@@ -58,7 +59,11 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
 
         labelPaint = Paint()
 
-        borderPaint = Paint()
+        borderPaint = Paint().apply {
+            style = Style.STROKE
+            strokeWidth = borderStrokeWidth
+            color = Color.GRAY
+        }
 
     }
 
@@ -73,6 +78,7 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
         drawAvatar(canvas)
+        drawBorder(canvas)
         drawLabel(canvas)
     }
 
@@ -90,7 +96,7 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
             avatarPaint.shader = avatarShader
 
 
-            val radius = avatarSize / 2
+            val radius = (avatarSize - borderStrokeWidth * 2) / 2
             val cx = avatarSize / 2
             val cy = avatarSize / 2
             canvas?.drawCircle(cx, cy, radius, avatarPaint)
@@ -108,26 +114,41 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
             )
 
             val radius = labelSize / 2
-            val cx = avatarSize - radius
-            val cy = avatarSize - radius
+            val cx = avatarSize - radius - 5f
+            val cy = avatarSize - radius - 5f
 
-            val labelShader = BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP).apply {
-                // 用Matrix进行图形变换，比如平移、缩放、旋转等操作
-                // 通过postTranslate()方法对图像进行平移操作
-                Matrix().apply {
-                    reset()
-                    postTranslate(
-                        avatarSize - labelSize,
-                        avatarSize - labelSize
-                    )
-                    setLocalMatrix(this)
+            val labelShader =
+                BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP).apply {
+                    // 用Matrix进行图形变换，比如平移、缩放、旋转等操作
+                    // 通过postTranslate()方法对图像进行平移操作
+                    Matrix().apply {
+                        reset()
+                        // 以左上角为基准进行平移操作
+                        postTranslate(
+                            cx - radius,
+                            cy - radius
+                        )
+                        setLocalMatrix(this)
+                    }
                 }
-            }
             labelPaint.shader = labelShader
             labelPaint.color = Color.RED
 
             canvas?.drawCircle(cx, cy, radius, labelPaint)
         }
+    }
+
+    private fun drawBorder(canvas: Canvas?) {
+        if (!isShowBorder) {
+            return
+        }
+
+        val cx = avatarSize / 2
+        val cy = avatarSize / 2
+
+        val borderRadius = avatarSize / 2 - borderStrokeWidth
+        canvas?.drawCircle(cx, cy, borderRadius, borderPaint)
+
     }
 
     @IntDef(
