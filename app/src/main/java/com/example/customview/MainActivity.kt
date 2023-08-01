@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
 
         _binding.avatarView.avatarDrawable =
             ResourcesCompat.getDrawable(resources, R.drawable.core_demo_cat, null)
-        _binding.avatarView.labelDrawable =
-            ResourcesCompat.getDrawable(resources, R.drawable.icon_avatar, null)
+        _binding.avatarView.isShowBorder = true
     }
 }

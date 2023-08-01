@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.annotation.IntDef
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.res.ResourcesCompat
 import com.example.customview.R
 import com.example.customview.utils.ImageUtil
 
@@ -34,7 +35,7 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
     // 标签资源
     private var labelSize: Float = 40f
     private var labelPaint: Paint
-    var labelDrawable: Drawable? = null
+    private var labelDrawable: Drawable? = null
         set(value) {
             field = value
             invalidate()
@@ -44,9 +45,27 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
     private var borderPaint: Paint
     private val borderStrokeWidth = 8f
 
-    var isShowBorder: Boolean = true
+    var isShowBorder: Boolean = false
 
     private var labelType: Int = LabelType.TYPE_NORMAL
+        set(value) {
+            when (value) {
+                LabelType.TYPE_NORMAL -> {
+                    labelDrawable = null
+                }
+
+                LabelType.TYPE_DEPOSIT -> {
+                    labelDrawable =
+                        ResourcesCompat.getDrawable(resources, R.drawable.icon_avatar_deposit, null)
+                }
+
+                LabelType.TYPE_OWNER -> {
+                    labelDrawable =
+                        ResourcesCompat.getDrawable(resources, R.drawable.icon_avatar_owner, null)
+                }
+            }
+            field = value
+        }
 
     init {
         attributes?.let {

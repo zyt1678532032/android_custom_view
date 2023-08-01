@@ -4,7 +4,7 @@
         <attr name="avatar_type" format="enum">
             <enum name="normal" value="0" />
             <enum name="deposit" value="1" />
-            <enum name="owner" value="0" />
+            <enum name="owner" value="2" />
         </attr>
     </declare-styleable>
 </resources>
