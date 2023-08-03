@@ -56,6 +56,7 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
             context.obtainStyledAttributes(it, R.styleable.AvatarView).apply {
                 labelType = getInt(R.styleable.AvatarView_avatar_type, LabelType.TYPE_NORMAL)
                 avatarDrawable = getDrawable(R.styleable.AvatarView_src)
+                // 在获取完所需要的属性值后调用recycle()方法，可以确保TypedArray对象被及时回收，避免出现异常和内存泄漏问题。
                 recycle()
             }
         }
