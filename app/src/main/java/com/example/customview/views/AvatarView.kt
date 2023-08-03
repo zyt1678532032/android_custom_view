@@ -55,6 +55,8 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
         attributes?.let {
             context.obtainStyledAttributes(it, R.styleable.AvatarView).apply {
                 labelType = getInt(R.styleable.AvatarView_avatar_type, LabelType.TYPE_NORMAL)
+                avatarDrawable = getDrawable(R.styleable.AvatarView_src)
+                recycle()
             }
         }
 

@@ -6,5 +6,6 @@
             <enum name="deposit" value="1" />
             <enum name="owner" value="2" />
         </attr>
+        <attr name="src" format="reference|color" />
     </declare-styleable>
 </resources>
