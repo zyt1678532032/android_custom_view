@@ -35,6 +35,7 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
     // 标签资源
     private var labelSize: Float = 40f
     private var labelPaint: Paint
+    private val matrix = Matrix()
     private var labelDrawable: Drawable? = null
         set(value) {
             field = value
@@ -48,24 +49,7 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
     var isShowBorder: Boolean = false
 
     private var labelType: Int = LabelType.TYPE_NORMAL
-        set(value) {
-            when (value) {
-                LabelType.TYPE_NORMAL -> {
-                    labelDrawable = null
-                }
 
-                LabelType.TYPE_DEPOSIT -> {
-                    labelDrawable =
-                        ResourcesCompat.getDrawable(resources, R.drawable.icon_avatar_deposit, null)
-                }
-
-                LabelType.TYPE_OWNER -> {
-                    labelDrawable =
-                        ResourcesCompat.getDrawable(resources, R.drawable.icon_avatar_owner, null)
-                }
-            }
-            field = value
-        }
 
     init {
         attributes?.let {
@@ -140,7 +124,7 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
                 BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP).apply {
                     // 用Matrix进行图形变换，比如平移、缩放、旋转等操作
                     // 通过postTranslate()方法对图像进行平移操作
-                    Matrix().apply {
+                    matrix.apply {
                         reset()
                         // 以左上角为基准进行平移操作
                         postTranslate(
@@ -167,7 +151,25 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
 
         val borderRadius = avatarSize / 2 - borderStrokeWidth
         canvas?.drawCircle(cx, cy, borderRadius, borderPaint)
+    }
 
+    fun setLabelType(@LabelType labelType: Int) {
+        when (labelType) {
+            LabelType.TYPE_NORMAL -> {
+                labelDrawable = null
+            }
+
+            LabelType.TYPE_DEPOSIT -> {
+                labelDrawable =
+                    ResourcesCompat.getDrawable(resources, R.drawable.icon_avatar_deposit, null)
+            }
+
+            LabelType.TYPE_OWNER -> {
+                labelDrawable =
+                    ResourcesCompat.getDrawable(resources, R.drawable.icon_avatar_owner, null)
+            }
+        }
+        this.labelType = labelType
     }
 
     @IntDef(
@@ -178,7 +180,8 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
     @Target(
         AnnotationTarget.TYPE_PARAMETER,
         AnnotationTarget.FUNCTION,
-        AnnotationTarget.FIELD
+        AnnotationTarget.FIELD,
+        AnnotationTarget.VALUE_PARAMETER
     )
     @Retention(AnnotationRetention.SOURCE)
     annotation class LabelType {
