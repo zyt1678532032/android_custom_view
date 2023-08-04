@@ -80,10 +80,14 @@ class TimeLineView(context: Context, attributeSet: AttributeSet? = null) :
         // 当应用处于后台不可见时，重新拉起是会调用draw，因此需要重制起始坐标,否则会出现内容不可见问题
         // onPause -> onResume
         // FIXME:
+        initStartXAndStartY()
+    }
+    // 这里进行初始化坐标的原因是因为，当应用的生命周期处于onPause时在恢复到onResume，此View实例并不会重新创建
+    // 而是调用onDraw()，因此为了活动的生命周期恢复为onResume时View的位置不会出现错误，所以进行初始化操作
+    private fun initStartXAndStartY() {
         startX = reachedCircleRadius
         startY = reachedCircleRadius
     }
-
 
     private fun drawTimeLine(canvas: Canvas?, data: TimeBean, index: Int) {
         drawCircle(canvas, data)

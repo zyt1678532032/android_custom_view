@@ -14,11 +14,11 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(_binding.root)
 
-        // _binding.avatarView.run {
-        //     setLabelType(AvatarView.LabelType.TYPE_OWNER)
-        //     avatarDrawable =
-        //         ResourcesCompat.getDrawable(resources, R.drawable.cat, null)
-        //     isShowBorder = true
-        // }
+        _binding.avatarView.run {
+            setLabelType(AvatarView.LabelType.TYPE_OWNER)
+            avatarDrawable =
+                ResourcesCompat.getDrawable(resources, R.drawable.cat, null)
+            isShowBorder = true
+        }
     }
 }
