@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingStart="@dimen/cardview_compat_inset_shadow"
     tools:context=".MainActivity">
 
 <!--    <com.example.customview.views.AvatarView-->
@@ -28,7 +29,6 @@
     <com.example.customview.views.TimeLineView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#4D000000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

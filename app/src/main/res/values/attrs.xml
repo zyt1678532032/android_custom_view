@@ -8,4 +8,8 @@
         </attr>
         <attr name="src" format="reference|color" />
     </declare-styleable>
+    <declare-styleable name="TimeLineView">
+        <attr name="time_paddingStart" format="dimension" />
+        <attr name="time_circleRadius" format="float" />
+    </declare-styleable>
 </resources>

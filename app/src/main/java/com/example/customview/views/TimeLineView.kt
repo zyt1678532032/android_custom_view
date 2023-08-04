@@ -6,13 +6,13 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatTextView
+import android.view.View
 import com.example.customview.R
 import com.example.customview.utils.dp
 
 // 时间轴View
-class TimeLineView(context: Context, attributeSet: AttributeSet) :
-    AppCompatTextView(context, attributeSet) {
+class TimeLineView(context: Context, attributeSet: AttributeSet? = null) :
+    View(context, attributeSet) {
 
     private var data: List<TimeBean> = fakeData
 
@@ -20,32 +20,35 @@ class TimeLineView(context: Context, attributeSet: AttributeSet) :
     var reachedCircleRadius: Float = 24f
 
     // 未到达节点的半径大小
-    var unreachedCircleRadius: Float = 24f
+    private var unreachedCircleRadius: Float = reachedCircleRadius
 
     private val marginStart: Float = 20f // 文字内容的右边距
-    private val circleMarginVertical: Float = 10.dp // 节点的上边距
+    private val marginBottom: Float = 40f
+    private val circleMarginVertical: Float = 5.dp // 节点的上边距
     private val lineLength: Float = 40.dp
 
     private var startX: Float = reachedCircleRadius // 时间轴元素的起点X坐标
-    private var startY: Float = reachedCircleRadius // 时间轴元素的起点Y坐标
+    private var startY: Float = reachedCircleRadius + 15.dp // 时间轴元素的起点Y坐标
 
     // FIXME: padding功能未添加
-    var paddingStart: Float = 20f
+    var paddingStart: Float = 20.dp
     var paddingTop: Float = 0f
-
-    private val paint: Paint
 
     @JvmField
     var textSize: Float = 14.dp
-    private val timeMarginTop: Float = 40f
-
+    private val textPaint: Paint
     private val circlePaint: Paint
     private val circleBorderPaint: Paint
 
-    private var hasFinishedDraw: Boolean = false
-
     init {
-        paint = Paint().apply {
+        attributeSet?.let {
+            context.obtainStyledAttributes(it, R.styleable.TimeLineView).apply {
+                paddingStart = getDimension(R.styleable.TimeLineView_time_paddingStart, 20.dp)
+                reachedCircleRadius = getFloat(R.styleable.TimeLineView_time_circleRadius, 24f)
+            }
+        }
+
+        textPaint = Paint().apply {
             isAntiAlias = true
             color = Color.BLACK
             textSize = this@TimeLineView.textSize // 设置字体大小
@@ -76,7 +79,7 @@ class TimeLineView(context: Context, attributeSet: AttributeSet) :
         }
         // 当应用处于后台不可见时，重新拉起是会调用draw，因此需要重制起始坐标,否则会出现内容不可见问题
         // onPause -> onResume
-        // FIXME:  
+        // FIXME:
         startX = reachedCircleRadius
         startY = reachedCircleRadius
     }
@@ -124,10 +127,10 @@ class TimeLineView(context: Context, attributeSet: AttributeSet) :
         val cx = startX + reachedCircleRadius + marginStart + paddingStart
         var cy = startY + reachedCircleRadius / 2
         // 描述
-        canvas?.drawText(data.description, cx, cy, paint)
+        canvas?.drawText(data.description, cx, cy, textPaint)
         // 时间
-        cy += textSize / 2 + timeMarginTop
-        canvas?.drawText(data.time, cx, cy, paint)
+        cy += textSize / 2 + marginBottom
+        canvas?.drawText(data.time, cx, cy, textPaint)
     }
 
     private fun drawLine(canvas: Canvas?, index: Int) {
@@ -138,7 +141,7 @@ class TimeLineView(context: Context, attributeSet: AttributeSet) :
         startY = endY + reachedCircleRadius + circleMarginVertical
 
         if (index != data.size - 1) { // 最后一个不画线
-            canvas?.drawLine(_startX, _startY, endX, endY, paint)
+            canvas?.drawLine(_startX, _startY, endX, endY, textPaint)
         }
     }
 
