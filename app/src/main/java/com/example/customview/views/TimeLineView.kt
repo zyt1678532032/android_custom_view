@@ -82,6 +82,7 @@ class TimeLineView(context: Context, attributeSet: AttributeSet? = null) :
         // FIXME:
         initStartXAndStartY()
     }
+
     // 这里进行初始化坐标的原因是因为，当应用的生命周期处于onPause时在恢复到onResume，此View实例并不会重新创建
     // 而是调用onDraw()，因此为了活动的生命周期恢复为onResume时View的位置不会出现错误，所以进行初始化操作
     private fun initStartXAndStartY() {
@@ -102,8 +103,8 @@ class TimeLineView(context: Context, attributeSet: AttributeSet? = null) :
         // 更新画笔状态
         when (data.status) {
             StatusType.UNREACHED -> {
-                circlePaint.color = resources.getColor(R.color.time_line_unreached)
-                circleBorderPaint.color = resources.getColor(R.color.white)
+                circlePaint.color = resources.getColor(R.color.time_line_unreached, null)
+                circleBorderPaint.color = resources.getColor(R.color.white, null)
                 circleBorderPaint.style = Paint.Style.STROKE
                 canvas?.drawCircle(cx, cy, unreachedCircleRadius, circlePaint)
                 canvas?.drawCircle(cx, cy, reachedCircleRadius, circleBorderPaint)
@@ -111,7 +112,7 @@ class TimeLineView(context: Context, attributeSet: AttributeSet? = null) :
 
             StatusType.CURRENT -> {
                 circlePaint.color = Color.WHITE
-                circleBorderPaint.color = resources.getColor(R.color.time_line_current)
+                circleBorderPaint.color = resources.getColor(R.color.time_line_current, null)
                 circleBorderPaint.style = Paint.Style.STROKE
                 canvas?.drawCircle(cx, cy, reachedCircleRadius, circlePaint)
                 canvas?.drawCircle(cx, cy, reachedCircleRadius, circleBorderPaint)
@@ -119,7 +120,7 @@ class TimeLineView(context: Context, attributeSet: AttributeSet? = null) :
 
             StatusType.REACHED -> {
                 circlePaint.color = Color.WHITE
-                circleBorderPaint.color = resources.getColor(R.color.time_line_reached)
+                circleBorderPaint.color = resources.getColor(R.color.time_line_reached, null)
                 circleBorderPaint.style = Paint.Style.STROKE
                 canvas?.drawCircle(cx, cy, reachedCircleRadius, circlePaint)
                 canvas?.drawCircle(cx, cy, reachedCircleRadius, circleBorderPaint)

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.example.customview.databinding.ActivityMainBinding
 import com.example.customview.views.AvatarView
+import com.example.customview.views.FollowFingerView
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,5 +21,8 @@ class MainActivity : AppCompatActivity() {
                 ResourcesCompat.getDrawable(resources, R.drawable.cat, null)
             isShowBorder = true
         }
+
+        val moveViewByTouch = FollowFingerView(this@MainActivity)
+        _binding.container.addView(moveViewByTouch)
     }
 }
