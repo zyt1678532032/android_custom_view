@@ -1,11 +1,11 @@
 package com.example.customview.views
 
-import android.app.ActionBar.LayoutParams
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import com.example.customview.R
 import com.example.customview.utils.dp
@@ -78,6 +78,9 @@ class TimeLineView(context: Context, attributeSet: AttributeSet? = null) :
         data.forEachIndexed { index, ele ->
             drawTimeLine(canvas, ele, index)
         }
+        Log.i("TimeLineView", "$startX----$startY")
+        startX = reachedCircleRadius
+        startY = reachedCircleRadius + 15.dp
     }
 
     private fun drawTimeLine(canvas: Canvas?, data: TimeBean, index: Int) {
@@ -160,25 +163,25 @@ val fakeData = listOf(
         description = "This is an expository copy ",
         time = "2022/01/01, 00:00"
     ),
-    TimeLineView.TimeBean(
-        status = TimeLineView.StatusType.CURRENT,
-        description = "This is an expository copy ",
-        time = "2022/01/01, 00:00"
-    ),
-    TimeLineView.TimeBean(
-        status = TimeLineView.StatusType.REACHED,
-        description = "This is an expository copy ",
-        time = "2022/01/01, 00:00"
-    ),
-    TimeLineView.TimeBean(
-        status = TimeLineView.StatusType.REACHED,
-        description = "This is an expository copy ",
-        time = "2022/01/01, 00:00"
-    ),
-    TimeLineView.TimeBean(
-        status = TimeLineView.StatusType.REACHED,
-        description = "This is an expository copy ",
-        time = "2022/01/01, 00:00"
-    )
+    // TimeLineView.TimeBean(
+    //     status = TimeLineView.StatusType.CURRENT,
+    //     description = "This is an expository copy ",
+    //     time = "2022/01/01, 00:00"
+    // ),
+    // TimeLineView.TimeBean(
+    //     status = TimeLineView.StatusType.REACHED,
+    //     description = "This is an expository copy ",
+    //     time = "2022/01/01, 00:00"
+    // ),
+    // TimeLineView.TimeBean(
+    //     status = TimeLineView.StatusType.REACHED,
+    //     description = "This is an expository copy ",
+    //     time = "2022/01/01, 00:00"
+    // ),
+    // TimeLineView.TimeBean(
+    //     status = TimeLineView.StatusType.REACHED,
+    //     description = "This is an expository copy ",
+    //     time = "2022/01/01, 00:00"
+    // )
 )
 
