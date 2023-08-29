@@ -8,16 +8,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View.LAYER_TYPE_HARDWARE
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ben_custom_view.views.AvatarView
+import com.example.ben_custom_view.views.FollowFingerView
+import com.example.ben_custom_view.views.TimeLineView2
 import com.example.customview.databinding.ActivityMainBinding
 import com.example.customview.databinding.ArticleHolderLayoutBinding
-import com.example.customview.views.AvatarView
-import com.example.customview.views.FollowFingerView
-import com.example.customview.views.TimeLineView2
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         val colorMatrixColorFilter = ColorMatrixColorFilter(colorMatrix)
         val paint = Paint()
         paint.colorFilter = colorMatrixColorFilter
-        _binding.avatarView.setLayerType(LAYER_TYPE_HARDWARE, paint)
+        // _binding.avatarView.setLayerType(LAYER_TYPE_HARDWARE, paint)
     }
 
     // 页面全局置灰

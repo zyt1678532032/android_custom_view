@@ -1,4 +1,4 @@
-package com.example.customview.views
+package com.example.ben_custom_view.views
 
 import android.annotation.SuppressLint
 import android.content.Context

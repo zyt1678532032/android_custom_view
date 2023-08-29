@@ -1,4 +1,4 @@
-package com.example.customview.views
+package com.example.ben_custom_view.views
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -10,10 +10,8 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
-import com.example.customview.R
-import com.example.customview.databinding.TimeLineLayoutBinding
-import com.example.customview.utils.ImageUtil
-import com.example.customview.utils.dp
+import com.example.ben_custom_view.R
+import com.example.ben_custom_view.databinding.TimeLineLayoutBinding
 
 /**
  * 使用XML布局文件进行自定义View的构建

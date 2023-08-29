@@ -1,4 +1,4 @@
-package com.example.customview.utils
+package com.example.ben_custom_view.utils
 
 import android.graphics.Bitmap
 import android.graphics.Canvas

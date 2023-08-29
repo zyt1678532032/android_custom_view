@@ -1,4 +1,4 @@
-package com.example.customview.views
+package com.example.ben_custom_view.views
 
 import android.content.Context
 import android.graphics.Canvas
@@ -7,8 +7,8 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import com.example.customview.R
-import com.example.customview.utils.dp
+import com.example.ben_custom_view.R
+import com.example.ben_custom_view.utils.dp
 
 // 时间轴View
 class TimeLineView(context: Context, attributeSet: AttributeSet? = null) :

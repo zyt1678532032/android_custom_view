@@ -1,4 +1,4 @@
-package com.example.customview.views
+package com.example.ben_custom_view.views
 
 import android.content.Context
 import android.graphics.BitmapShader
@@ -13,8 +13,8 @@ import android.util.AttributeSet
 import androidx.annotation.IntDef
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.res.ResourcesCompat
-import com.example.customview.R
-import com.example.customview.utils.ImageUtil
+import com.example.ben_custom_view.R
+import com.example.ben_custom_view.utils.ImageUtil
 
 /**
  * 自定义头像视图 AvatarView

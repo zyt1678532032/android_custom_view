@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AvatarView">
+        <attr name="avatar_type" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="deposit" value="1" />
+            <enum name="owner" value="2" />
+        </attr>
+        <attr name="src" format="reference|color" />
+    </declare-styleable>
+    <declare-styleable name="TimeLineView">
+        <attr name="time_paddingStart" format="dimension" />
+        <attr name="time_circleRadius" format="float" />
+    </declare-styleable>
+</resources>
