@@ -73,7 +73,7 @@ class TimeLineView(context: Context, attributeSet: AttributeSet? = null) :
         setMeasuredDimension(layoutWidth, (eleHeight * data.size).toInt())
     }
 
-    override fun draw(canvas: Canvas?) {
+    override fun draw(canvas: Canvas) {
         super.draw(canvas)
         data.forEachIndexed { index, ele ->
             drawTimeLine(canvas, ele, index)
@@ -163,25 +163,25 @@ val fakeData = listOf(
         description = "This is an expository copy ",
         time = "2022/01/01, 00:00"
     ),
-    // TimeLineView.TimeBean(
-    //     status = TimeLineView.StatusType.CURRENT,
-    //     description = "This is an expository copy ",
-    //     time = "2022/01/01, 00:00"
-    // ),
-    // TimeLineView.TimeBean(
-    //     status = TimeLineView.StatusType.REACHED,
-    //     description = "This is an expository copy ",
-    //     time = "2022/01/01, 00:00"
-    // ),
-    // TimeLineView.TimeBean(
-    //     status = TimeLineView.StatusType.REACHED,
-    //     description = "This is an expository copy ",
-    //     time = "2022/01/01, 00:00"
-    // ),
-    // TimeLineView.TimeBean(
-    //     status = TimeLineView.StatusType.REACHED,
-    //     description = "This is an expository copy ",
-    //     time = "2022/01/01, 00:00"
-    // )
+    TimeLineView.TimeBean(
+        status = TimeLineView.StatusType.CURRENT,
+        description = "This is an expository copy ",
+        time = "2022/01/01, 00:00"
+    ),
+    TimeLineView.TimeBean(
+        status = TimeLineView.StatusType.REACHED,
+        description = "This is an expository copy ",
+        time = "2022/01/01, 00:00"
+    ),
+    TimeLineView.TimeBean(
+        status = TimeLineView.StatusType.REACHED,
+        description = "This is an expository copy ",
+        time = "2022/01/01, 00:00"
+    ),
+    TimeLineView.TimeBean(
+        status = TimeLineView.StatusType.REACHED,
+        description = "This is an expository copy ",
+        time = "2022/01/01, 00:00"
+    )
 )
 

@@ -76,9 +76,9 @@ class FollowFingerView(context: Context, attributeSet: AttributeSet? = null) :
     }
 
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        canvas?.drawCircle(mLastX, mLastY, 50f, paint)
+        canvas.drawCircle(mLastX, mLastY, 50f, paint)
     }
 
 }

@@ -19,22 +19,21 @@ import com.example.ben_custom_view.databinding.TimeLineLayoutBinding
 class TimeLineView2(context: Context, attrs: AttributeSet? = null) :
     ConstraintLayout(context, attrs) {
 
-    private val _bind: TimeLineLayoutBinding
+    private val _binding: TimeLineLayoutBinding
 
     init {
-        _bind = TimeLineLayoutBinding.inflate(LayoutInflater.from(context), this, true)
+        _binding = TimeLineLayoutBinding.inflate(LayoutInflater.from(context), this, true)
         circleImage()
     }
 
     // 图像裁剪 -- ImageView 显示为圆形图像
     private fun circleImage() {
         // 获取原图像的bitmap
-        val bitmap =
-            ResourcesCompat.getDrawable(resources, R.drawable.icon_avatar_deposit, null)?.toBitmap()
+        val drawable = ResourcesCompat.getDrawable(resources, R.drawable.icon_avatar_deposit, null)
+        val bitmap = drawable!!.toBitmap()
 
         // 创建圆形的bitmap
-        val circleBitmap =
-            Bitmap.createBitmap(bitmap!!.width, bitmap.height, Bitmap.Config.ARGB_8888)
+        val circleBitmap = Bitmap.createBitmap(bitmap.width, bitmap.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(circleBitmap)
         val path = Path()
         path.addCircle(
@@ -47,13 +46,12 @@ class TimeLineView2(context: Context, attrs: AttributeSet? = null) :
         canvas.drawBitmap(bitmap, 0f, 0f, null)
 
         // 设置bitmap
-        _bind.image.setImageBitmap(circleBitmap)
+        _binding.image.setImageBitmap(circleBitmap)
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         Log.i("TimeLineView2", "-------")
     }
-
 
 }
