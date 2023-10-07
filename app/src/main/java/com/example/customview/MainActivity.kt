@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ben_custom_view.views.AvatarView
 import com.example.ben_custom_view.views.FollowFingerView
 import com.example.ben_custom_view.views.TimeLineView2
+import com.example.customview.adapter.MySlidingAdapter
 import com.example.customview.databinding.ActivityMainBinding
 import com.example.customview.databinding.ArticleHolderLayoutBinding
 
@@ -40,10 +41,15 @@ class MainActivity : AppCompatActivity() {
 
         val moveViewByTouch = FollowFingerView(this@MainActivity)
         _binding.container.addView(moveViewByTouch)
-
         _binding.container.addView(TimeLineView2(this))
 
-        bindRecycleView()
+        val slidingAdapter = MySlidingAdapter().apply {
+            data = listOf("2", "3", "5")
+        }
+        _binding.recycleView.run {
+            adapter = slidingAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
     }
 
     private fun setAvatarGray() {
@@ -66,55 +72,5 @@ class MainActivity : AppCompatActivity() {
         this.window.decorView.setLayerType(LAYER_TYPE_HARDWARE, grayPaint)
     }
 
-    private fun bindRecycleView() {
-        _binding.recycleView.layoutManager = LinearLayoutManager(this)
-        val adapter = ArticleAdapter()
-        adapter.data = listOf(
-            Article(),
-            Article(),
-            Article(),
-            Article()
-        )
-        _binding.recycleView.adapter = adapter
-    }
 
 }
-
-class ArticleAdapter : RecyclerView.Adapter<ArticleHolder>() {
-
-    var data: List<Article> = emptyList()
-        @SuppressLint("NotifyDataSetChanged")
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleHolder {
-        val binding =
-            ArticleHolderLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ArticleHolder(binding)
-    }
-
-    override fun getItemCount(): Int = data.size
-
-    override fun onBindViewHolder(holder: ArticleHolder, position: Int) {
-        holder.titleView.text = data[position].title
-        holder.authorView.text = data[position].author
-        holder.rootView.setOnClickListener {
-            // TODO: 拉起Activity
-        }
-    }
-
-}
-
-class ArticleHolder(binding: ArticleHolderLayoutBinding) :
-    RecyclerView.ViewHolder(binding.root) {
-    val rootView = binding.root
-    val titleView = binding.title
-    val authorView = binding.author
-}
-
-data class Article(
-    val title: String = "title",
-    val author: String = "author"
-)
