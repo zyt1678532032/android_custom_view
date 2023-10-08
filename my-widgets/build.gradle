@@ -87,7 +87,7 @@ publishing {
         zytwidgets(MavenPublication) {
             groupId = 'com.zyt.widgets'
             artifactId = 'my-widgets'
-            version = '0.0.2'
+            version = '0.0.2-SNAPSHOT'
             // 从aar中发布, gradle插件点击build就可以生成aar
             artifact("$buildDir/outputs/aar/$project.name-debug.aar")
         }
