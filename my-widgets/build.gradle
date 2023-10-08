@@ -71,6 +71,13 @@ publishing {
     }
 }
 
+// 上传脚本中新增task，类型为Jar
+task androidSourceJar(type: Jar) {
+    // from project.android.sourceSets.main.java.sourceFiles // 不包括Kotlin文件
+    from project.android.sourceSets.main.java.getSrcDirs() // 包括Kotlin文件
+    archiveClassifier = 'sources'
+}
+
 // 发布到本地MavenLocal
 publishing {
     // 定义发布到哪
@@ -90,6 +97,7 @@ publishing {
             version = '0.0.2-SNAPSHOT'
             // 从aar中发布, gradle插件点击build就可以生成aar
             artifact("$buildDir/outputs/aar/$project.name-debug.aar")
+            artifact androidSourceJar // 上传源码
         }
     }
 }
