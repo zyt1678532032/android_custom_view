@@ -19,17 +19,35 @@
             android:text="测试置灰"
             android:textColor="@color/time_line_reached" />
 
-        <com.zyt.widgets.views.AvatarView
-            android:id="@+id/avatarView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
-            app:avatar_type="owner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="horizontal">
+
+            <com.zyt.widgets.views.AvatarView
+                android:id="@+id/avatarView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                app:avatar_type="owner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.zyt.widgets.views.AvatarView
+                android:id="@+id/avatarView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                app:avatar_type="owner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
 
         <com.zyt.widgets.views.TimeLineView
             android:layout_width="match_parent"
@@ -45,8 +63,16 @@
             android:id="@+id/recycleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/viewholder_test_layout"
-            tools:itemCount="2"/>
+            tools:itemCount="2"
+            tools:listitem="@layout/viewholder_test_layout" />
+
+        <com.zyt.widgets.views.BatteryMeterView
+            android:id="@+id/battery_view"
+            android:layout_width="200dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center"
+            app:battery_level="30"
+            app:charging="false" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

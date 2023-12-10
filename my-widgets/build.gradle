@@ -72,7 +72,7 @@ publishing {
 }
 
 // 上传脚本中新增task，类型为Jar
-task androidSourceJar(type: Jar) {
+tasks.register('androidSourceJar', Jar) {
     // from project.android.sourceSets.main.java.sourceFiles // 不包括Kotlin文件
     from project.android.sourceSets.main.java.getSrcDirs() // 包括Kotlin文件
     archiveClassifier = 'sources'

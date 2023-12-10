@@ -12,4 +12,16 @@
         <attr name="time_paddingStart" format="dimension" />
         <attr name="time_circleRadius" format="float" />
     </declare-styleable>
+
+    <declare-styleable name="BatteryMeterView">
+        <attr name="charging" format="boolean" />
+        <attr name="warning_level" format="integer" />
+        <attr name="battery_level" format="integer" />
+        <attr name="normal_fill_color" format="color" />
+        <attr name="warning_fill_color" format="color" />
+        <attr name="background_fill_color" format="color" />
+        <attr name="battery_head_color" format="color" />
+        <attr name="charging_color" format="color" />
+        <attr name="text_color" format="color" />
+    </declare-styleable>
 </resources>
