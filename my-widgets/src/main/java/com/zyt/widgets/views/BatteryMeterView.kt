@@ -5,7 +5,6 @@ import android.graphics.*
 import android.graphics.Paint.ANTI_ALIAS_FLAG
 import android.util.AttributeSet
 import android.view.View
-import androidx.annotation.CheckResult
 import androidx.annotation.ColorInt
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import com.zyt.widgets.R
@@ -87,7 +86,6 @@ class BatteryMeterView @JvmOverloads constructor(
     // Battery Status
 
     var isCharging: Boolean = DEFAULT_CHARGING_STATE
-        @CheckResult
         get() = field
         set(value) {
             field = value
@@ -95,7 +93,6 @@ class BatteryMeterView @JvmOverloads constructor(
         }
 
     var batteryLevel: Int = DEFAULT_BATTERY_LEVEL
-        @CheckResult
         get() = field
         set(level) {
             field = when {

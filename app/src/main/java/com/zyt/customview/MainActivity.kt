@@ -29,8 +29,9 @@ class MainActivity : AppCompatActivity() {
 
         _binding.avatarView.run {
             setLabelType(AvatarView.LabelType.TYPE_OWNER)
-            avatarDrawable =
-                ResourcesCompat.getDrawable(resources, R.drawable.cat, null)
+            isShowBorder = true
+        }
+        _binding.avatarView2.run {
             isShowBorder = true
         }
         setAvatarGray()

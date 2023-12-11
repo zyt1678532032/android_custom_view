@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Paint.Style
+import android.graphics.Rect
 import android.graphics.Shader
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
@@ -50,20 +51,26 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
 
     private var labelType: Int = LabelType.TYPE_NORMAL
 
-
     init {
         attributes?.let {
-            context.obtainStyledAttributes(it, R.styleable.AvatarView).apply {
-                labelType = getInt(R.styleable.AvatarView_avatar_type, LabelType.TYPE_NORMAL)
+            context.obtainStyledAttributes(it, R.styleable.AvatarView).run {
+                labelType = getInt(R.styleable.AvatarView_avatar_type, LabelType.TYPE_NORMAL).run {
+                    setLabelType(this)
+                    this
+                }
                 avatarDrawable = getDrawable(R.styleable.AvatarView_src)
                 // 在获取完所需要的属性值后调用recycle()方法，可以确保TypedArray对象被及时回收，避免出现异常和内存泄漏问题。
                 recycle()
             }
         }
 
-        avatarPaint = Paint()
+        avatarPaint = Paint().apply {
+            style = Style.FILL
+        }
 
-        labelPaint = Paint()
+        labelPaint = Paint().apply {
+            style = Style.FILL
+        }
 
         borderPaint = Paint().apply {
             style = Style.STROKE
@@ -76,18 +83,22 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         // 自定义View的控件大小
-        val elementWidth = avatarSize.toInt()
-        val elementHeight = avatarSize.toInt()
-        layoutParams.width = elementWidth
-        layoutParams.height = elementHeight
-        // setMeasuredDimension(elementWidth, elementHeight)
+        // val elementWidth = avatarSize.toInt()
+        // val elementHeight = avatarSize.toInt()
+        // layoutParams.width = elementWidth
+        // layoutParams.height = elementHeight
+        // setMeasuredDimension(300, 300)
     }
 
-    override fun draw(canvas: Canvas) {
-        super.draw(canvas)
+    override fun onDraw(canvas: Canvas) {
+        // canvas.drawCircle(50f, 50f, 50f, Paint())
         drawAvatar(canvas)
         drawBorder(canvas)
         drawLabel(canvas)
+    }
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        avatarSize = w.toFloat()
     }
 
     private fun drawAvatar(canvas: Canvas) {

@@ -73,8 +73,7 @@ class TimeLineView(context: Context, attributeSet: AttributeSet? = null) :
         setMeasuredDimension(layoutWidth, (eleHeight * data.size).toInt())
     }
 
-    override fun draw(canvas: Canvas) {
-        super.draw(canvas)
+    override fun onDraw(canvas: Canvas) {
         data.forEachIndexed { index, ele ->
             drawTimeLine(canvas, ele, index)
         }

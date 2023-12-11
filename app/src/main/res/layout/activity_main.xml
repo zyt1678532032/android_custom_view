@@ -26,27 +26,27 @@
 
             <com.zyt.widgets.views.AvatarView
                 android:id="@+id/avatarView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
                 android:background="@color/white"
                 app:avatar_type="owner"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:src="@drawable/cat" />
 
             <com.zyt.widgets.views.AvatarView
                 android:id="@+id/avatarView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
                 android:background="@color/white"
-                app:avatar_type="owner"
+                app:avatar_type="deposit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:src="@drawable/cat" />
         </LinearLayout>
 
         <com.zyt.widgets.views.TimeLineView
@@ -72,7 +72,7 @@
             android:layout_height="90dp"
             android:layout_gravity="center"
             app:battery_level="30"
-            app:charging="false" />
+            app:charging="true" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
