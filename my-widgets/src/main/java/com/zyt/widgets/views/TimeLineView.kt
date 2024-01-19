@@ -49,6 +49,7 @@ class TimeLineView(context: Context, attributeSet: AttributeSet? = null) :
         }
 
         textPaint = Paint().apply {
+            style = Paint.Style.FILL
             isAntiAlias = true
             color = Color.BLACK
             textSize = this@TimeLineView.textSize // 设置字体大小
@@ -57,6 +58,7 @@ class TimeLineView(context: Context, attributeSet: AttributeSet? = null) :
 
         circlePaint = Paint().apply {
             color = Color.WHITE
+            style = Paint.Style.FILL
         }
 
         circleBorderPaint = Paint().apply {

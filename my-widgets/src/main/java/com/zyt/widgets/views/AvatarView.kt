@@ -98,7 +98,11 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        avatarSize = w.toFloat()
+        avatarSize = if (w >= h) {
+            h.toFloat()
+        } else {
+            w.toFloat()
+        }
     }
 
     private fun drawAvatar(canvas: Canvas) {
