@@ -8,6 +8,7 @@ import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Paint.Style
 import android.graphics.Rect
+import android.graphics.RectF
 import android.graphics.Shader
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
@@ -98,11 +99,7 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        avatarSize = if (w >= h) {
-            h.toFloat()
-        } else {
-            w.toFloat()
-        }
+        avatarSize = w.toFloat()
     }
 
     private fun drawAvatar(canvas: Canvas) {
@@ -139,19 +136,27 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
             val cx = avatarSize - radius - 5f
             val cy = avatarSize - radius - 5f
 
-            val labelShader = BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
-            // 用Matrix进行图形变换，比如平移、缩放、旋转等操作
-            // 通过postTranslate()方法对图像进行平移操作
-            matrix.run {
-                reset()
-                // 以左上角为基准进行平移操作
-                postTranslate(cx - radius, cy - radius)
-            }
-            labelShader.setLocalMatrix(matrix)
-            labelPaint.shader = labelShader
-            labelPaint.color = Color.RED
+            // val labelShader = BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+            // matrix.run {
+            //     reset()
+            //     setTranslate(cx - radius, cy - radius)
+            // }
+            // labelShader.setLocalMatrix(matrix)
+            // labelPaint.shader = labelShader
+            // labelPaint.color = Color.RED
 
-            canvas.drawCircle(cx, cy, radius, labelPaint)
+            canvas.drawBitmap(
+                bitmap,
+                null,
+                RectF(
+                    avatarSize - labelSize,
+                    avatarSize - labelSize,
+                    avatarSize,
+                    avatarSize
+                ),
+                labelPaint
+            )
+            // canvas.drawCircle(avatarSize / 2, avatarSize / 2, radius, labelPaint)
         }
     }
 
