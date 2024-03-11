@@ -88,7 +88,10 @@ class AvatarView(context: Context, attributes: AttributeSet? = null) :
         // val elementHeight = avatarSize.toInt()
         // layoutParams.width = elementWidth
         // layoutParams.height = elementHeight
-        // setMeasuredDimension(300, 300)
+        setMeasuredDimension(
+            MeasureSpec.getSize(widthMeasureSpec),
+            MeasureSpec.getSize(heightMeasureSpec)
+        )
     }
 
     override fun onDraw(canvas: Canvas) {

@@ -231,7 +231,7 @@ class BatteryMeterView @JvmOverloads constructor(
     }
 
     private fun drawBackground(canvas: Canvas) {
-        canvas.drawRect(backgroundRect, backgroundPaint)
+        canvas.drawRoundRect(RectF(backgroundRect), 50f, 50f, backgroundPaint)
         canvas.drawRoundRect(RectF(backgroundRect), 50f, 50f, backgroundPaintStroke)
     }
 

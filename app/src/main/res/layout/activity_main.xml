@@ -27,7 +27,7 @@
             <com.zyt.widgets.views.AvatarView
                 android:id="@+id/avatarView"
                 android:layout_width="60dp"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="10dp"
                 android:background="@color/white"
                 app:avatar_type="owner"
@@ -54,6 +54,10 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.zyt.widgets.views.TimeLineView2
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <com.zyt.widgets.views.TimeLineView2
             android:layout_width="wrap_content"
