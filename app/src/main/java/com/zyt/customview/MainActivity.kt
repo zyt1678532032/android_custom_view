@@ -1,19 +1,20 @@
 package com.zyt.customview
 
+import android.graphics.Color
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.os.Bundle
 import android.view.View.LAYER_TYPE_HARDWARE
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.customview.R
-import com.zyt.customview.adapter.MySlidingAdapter
 import com.example.customview.databinding.ActivityMainBinding
+import com.zyt.customview.adapter.MySlidingAdapter
 import com.zyt.widgets.views.AvatarView
 import com.zyt.widgets.views.FollowFingerView
 import com.zyt.widgets.views.TimeLineView2
+import kotlin.random.Random
+import kotlin.random.nextInt
 
 
 class MainActivity : AppCompatActivity() {
@@ -46,6 +47,14 @@ class MainActivity : AppCompatActivity() {
         _binding.recycleView.run {
             adapter = slidingAdapter
             layoutManager = LinearLayoutManager(context)
+        }
+
+        _binding.rectView.size = 200
+        _binding.rectView.color = Color.BLUE
+
+        _binding.btn.setOnClickListener {
+            val x = Random.nextInt(0..9)
+            _binding.rectView.text = "00:4$x / 10:24"
         }
     }
 
