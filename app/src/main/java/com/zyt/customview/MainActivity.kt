@@ -1,12 +1,23 @@
 package com.zyt.customview
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.graphics.Color
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
+import android.graphics.Path
 import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
+import android.view.View
 import android.view.View.LAYER_TYPE_HARDWARE
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.LinearInterpolator
+import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.customview.databinding.ActivityMainBinding
 import com.zyt.customview.adapter.MySlidingAdapter
@@ -52,9 +63,51 @@ class MainActivity : AppCompatActivity() {
         _binding.rectView.size = 200
         _binding.rectView.color = Color.BLUE
 
+        ValueAnimator.ofFloat(0f, 100f).apply {
+            duration = 1000
+            addUpdateListener { updatedAnimation ->
+                _binding.btn.translationX = updatedAnimation.animatedValue as Float
+            }
+            start()
+        }
+
+        crossFade()
+
+        // _binding.avatarView.apply {
+        //     animate().scaleX(0.5f).scaleY(0.5f)
+        // }
+
+        _binding.avatarView2.apply {
+            // 旋转
+            ObjectAnimator.ofFloat(this, "rotationY", 0f, 360f).also {
+                it.duration = 1000
+                it.start()
+            }
+
+            setOnClickListener {
+                // 缩放
+                ObjectAnimator.ofFloat(this, "scaleX", "scaleY", Path().also {
+                    it.lineTo(1f, 1f)
+                }).apply {
+                    interpolator = AccelerateInterpolator()
+                    duration = 1000
+                    start()
+                }
+            }
+        }
+
         _binding.btn.setOnClickListener {
             val x = Random.nextInt(0..9)
             _binding.rectView.text = "00:4$x / 10:24"
+        }
+    }
+
+    private fun crossFade() {
+        _binding.avatarView.apply {
+            alpha = 0f
+            isVisible = true
+
+            animate().alpha(1f).setDuration(1000).setListener(null)
         }
     }
 
